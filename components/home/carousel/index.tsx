@@ -1,6 +1,5 @@
 import { View } from 'react-native';
 import React from 'react';
-import { SliderBox } from 'react-native-image-slider-box';
 import styles from './styles';
 import { COLORS } from '../../../constants';
 
@@ -13,12 +12,12 @@ export const HomeCarousel = () => {
 
     return (
         <View style={styles.container}>
-            <SliderBox
+            {/* <SliderBox
                 images={slides}
                 dotColor={COLORS.primary}
                 inactiveDotColor={COLORS.secondary}
                 ImageComponentStyle={styles.imageComponentStyle}
-            />
+            /> */}
         </View>
     );
 }
