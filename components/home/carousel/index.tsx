@@ -68,21 +68,23 @@ export const HomeCarousel = () => {
                 onMomentumScrollEnd={handleScroll}
             />
 
-            <View style={styles.dots}>
-                {
-                    slides.map((_: any, i: number) => (
-                        <TouchableOpacity
-                            key={i}
-                            style={[
-                                styles.circle,
-                                {
-                                    backgroundColor: i === currentIndex ? COLORS.primary : COLORS.gray
-                                }
-                            ]}
-                            onPress={() => scrollToIndex(i)}
-                        />
-                    ))
-                }
+            <View style={styles.dotsContainer}>
+                <View style={styles.dots}>
+                    {
+                        slides.map((_: any, i: number) => (
+                            <TouchableOpacity
+                                key={i}
+                                style={[
+                                    styles.circle,
+                                    {
+                                        backgroundColor: i === currentIndex ? COLORS.primary : COLORS.gray2
+                                    }
+                                ]}
+                                onPress={() => scrollToIndex(i)}
+                            />
+                        ))
+                    }
+                </View>
             </View>
         </View>
     );

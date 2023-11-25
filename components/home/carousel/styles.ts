@@ -21,6 +21,10 @@ const styles = StyleSheet.create({
         borderRadius: SIZES.small,
         marginHorizontal: 15,
     },
+    dotsContainer: {
+        position: 'absolute',
+        bottom: 3,
+    },
     dots: {
         flexDirection: 'row',
         justifyContent: 'center',
