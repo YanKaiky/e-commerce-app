@@ -9,18 +9,17 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: SIZES.small,
     },
     carousel: {
         maxHeight: width / 2,
     },
     image: {
-        width: width - 20,
+        width: width - 30,
         height: width / 2,
         justifyContent: 'center',
         resizeMode: 'cover',
         borderRadius: SIZES.small,
-        marginHorizontal: 10,
+        marginHorizontal: 15,
     },
     dots: {
         flexDirection: 'row',

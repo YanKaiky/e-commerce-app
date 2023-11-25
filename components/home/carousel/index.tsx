@@ -21,7 +21,7 @@ export const HomeCarousel = () => {
         if (changed[0].isViewable) {
             setCurrentIndex(changed[0].index);
         }
-    })
+    });
 
     const handleScroll = (event: any) => {
         const offset = event.nativeEvent.contentOffset.x;
@@ -44,47 +44,45 @@ export const HomeCarousel = () => {
     }, [currentIndex]);
 
     return (
-        <View>
-            <View style={styles.container}>
-                <FlatList
-                    data={slides}
-                    horizontal
-                    pagingEnabled
-                    bounces={false}
-                    keyExtractor={(item) => item}
-                    showsHorizontalScrollIndicator={false}
-                    ref={(ref) => flatList.current = ref}
-                    renderItem={({ item }) => {
-                        return (
-                            <TouchableOpacity onPress={() => console.log(item)} activeOpacity={1}>
-                                <Image source={{ uri: item }} style={styles.image} />
-                            </TouchableOpacity>
-                        )
-                    }}
-                    onScroll={Animated.event([{ nativeEvent: { contentOffset: { x: scrollX } } }], {
-                        useNativeDriver: false,
-                    })}
-                    style={styles.carousel}
-                    onViewableItemsChanged={onViewRef.current}
-                    onMomentumScrollEnd={handleScroll}
-                />
+        <View style={styles.container}>
+            <FlatList
+                data={slides}
+                horizontal
+                pagingEnabled
+                bounces={false}
+                keyExtractor={(item) => item}
+                showsHorizontalScrollIndicator={false}
+                ref={(ref) => flatList.current = ref}
+                renderItem={({ item }) => {
+                    return (
+                        <TouchableOpacity onPress={() => console.log(item)} activeOpacity={1}>
+                            <Image source={{ uri: item }} style={styles.image} />
+                        </TouchableOpacity>
+                    )
+                }}
+                onScroll={Animated.event([{ nativeEvent: { contentOffset: { x: scrollX } } }], {
+                    useNativeDriver: false,
+                })}
+                style={styles.carousel}
+                onViewableItemsChanged={onViewRef.current}
+                onMomentumScrollEnd={handleScroll}
+            />
 
-                <View style={styles.dots}>
-                    {
-                        slides.map((_: any, i: number) => (
-                            <TouchableOpacity
-                                key={i}
-                                style={[
-                                    styles.circle,
-                                    {
-                                        backgroundColor: i === currentIndex ? COLORS.primary : COLORS.gray
-                                    }
-                                ]}
-                                onPress={() => scrollToIndex(i)}
-                            />
-                        ))
-                    }
-                </View>
+            <View style={styles.dots}>
+                {
+                    slides.map((_: any, i: number) => (
+                        <TouchableOpacity
+                            key={i}
+                            style={[
+                                styles.circle,
+                                {
+                                    backgroundColor: i === currentIndex ? COLORS.primary : COLORS.gray
+                                }
+                            ]}
+                            onPress={() => scrollToIndex(i)}
+                        />
+                    ))
+                }
             </View>
         </View>
     );
