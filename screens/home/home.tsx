@@ -3,8 +3,7 @@ import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons, Fontisto } from '@expo/vector-icons';
 import styles from './styles';
-import { HomeWelcome } from '../../components';
-import { HomeCarousel } from '../../components/home/carousel';
+import { HomeCarousel, HomeHeadings, HomeWelcome, ProductsRow } from '../../components';
 
 export const Home = () => {
     return (
@@ -29,6 +28,8 @@ export const Home = () => {
             <ScrollView>
                 <HomeWelcome />
                 <HomeCarousel />
+                <HomeHeadings />
+                <ProductsRow />
             </ScrollView>
         </SafeAreaView>
     );
