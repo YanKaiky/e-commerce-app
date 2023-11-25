@@ -1,14 +1,14 @@
 import { Animated, FlatList, Image, TouchableOpacity, View } from 'react-native';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styles from './styles';
-import { COLORS } from '../../../constants';
+import { COLORS, SIZES } from '../../../constants';
 
 export const HomeCarousel = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
 
     const scrollX = useRef(new Animated.Value(0)).current;
 
-    let flatList = useRef<FlatList<string> | null>();
+    let flatList = useRef<FlatList<string> | null>(null);
 
     const slides = [
         'https://e-commerce-forniture.s3.sa-east-1.amazonaws.com/closet.png',
@@ -23,9 +23,25 @@ export const HomeCarousel = () => {
         }
     })
 
+    const handleScroll = (event: any) => {
+        const offset = event.nativeEvent.contentOffset.x;
+        const index = Math.round(offset / SIZES.width);
+        setCurrentIndex(index);
+    };
+
+    const scrollToNext = () => {
+        const nextIndex = (currentIndex + 1) % slides.length;
+        flatList.current?.scrollToIndex({ index: nextIndex, animated: true });
+    };
+
     const scrollToIndex = (index: number) => {
         flatList.current?.scrollToIndex({ animated: true, index });
     };
+
+    useEffect(() => {
+        const timer = setInterval(scrollToNext, 3000);
+        return () => clearInterval(timer);
+    }, [currentIndex]);
 
     return (
         <View>
@@ -50,6 +66,7 @@ export const HomeCarousel = () => {
                     })}
                     style={styles.carousel}
                     onViewableItemsChanged={onViewRef.current}
+                    onMomentumScrollEnd={handleScroll}
                 />
 
                 <View style={styles.dots}>
