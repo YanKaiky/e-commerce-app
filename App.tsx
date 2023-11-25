@@ -4,7 +4,7 @@ import { useCallback } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { BottomTabNavigation } from './navigation';
-import { Cart } from './screens';
+import { Cart, ProductsDetails } from './screens';
 
 const Stack = createNativeStackNavigator();
 
@@ -22,13 +22,14 @@ const App = () => {
     if (fontsLoaded) await SplashScreen.hideAsync();
   }, [fontsLoaded]);
 
-  if (!fontsLoaded) return null
+  if (!fontsLoaded) return null;
 
   return (
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name='Bottom Navigation' component={BottomTabNavigation} options={{ headerShown: false }} />
         <Stack.Screen name='Cart' component={Cart} options={{ headerShown: false }} />
+        <Stack.Screen name='Products Details' component={ProductsDetails} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
