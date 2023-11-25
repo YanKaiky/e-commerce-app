@@ -19,7 +19,7 @@ const COLORS = {
 
 const SIZES = {
     xSmall: 10,
-    small: 12,
+    small: 15,
     medium: 16,
     large: 20,
     xLarge: 24,

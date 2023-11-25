@@ -1,17 +1,20 @@
-import { NavigationProp, useNavigation } from '@react-navigation/native';
-import { TextInput, TouchableOpacity, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { Feather, Ionicons } from '@expo/vector-icons';
-import styles from './styles';
 import React from 'react';
-import { COLORS, SIZES } from '../../constants';
+import styles from './styles';
+import { COLORS, SIZES } from '../../../constants';
 
-export const Search = () => {
+export const HomeCarousel = () => {
     return (
-        <SafeAreaView>
+        <View>
+            <View style={styles.container}>
+                <Text style={styles.welcomeTxt}>Find the most</Text>
+                <Text style={styles.welcomeTxt2}>Luxurious furniture</Text>
+            </View>
+
             <View style={styles.searchContainer}>
                 <TouchableOpacity>
-                    <Ionicons name='camera-outline' size={24} style={styles.searchIcon} />
+                    <Feather name='search' size={24} style={styles.searchIcon} />
                 </TouchableOpacity>
                 <View style={styles.searchWrapper}>
                     <TextInput
@@ -24,14 +27,14 @@ export const Search = () => {
 
                 <View>
                     <TouchableOpacity style={styles.searchBtn}>
-                        <Feather
-                            name='search'
+                        <Ionicons
+                            name='camera-outline'
                             size={SIZES.xLarge}
                             color={COLORS.offwhite}
                         />
                     </TouchableOpacity>
                 </View>
             </View>
-        </SafeAreaView>
+        </View>
     );
 }
