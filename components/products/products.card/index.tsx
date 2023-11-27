@@ -3,10 +3,13 @@ import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
 import styles from './styles';
 import { COLORS } from '../../../constants';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
 
 export const ProductsCard = () => {
+    const navigation: NavigationProp<any> = useNavigation();
+
     return (
-        <TouchableOpacity onPress={() => { }}>
+        <TouchableOpacity onPress={() => navigation.navigate('ProductsDetails')}>
             <View style={styles.container}>
                 <View style={styles.imageContainer}>
                     <Image
@@ -22,7 +25,7 @@ export const ProductsCard = () => {
                     <Text style={styles.price}>$237</Text>
                 </View>
 
-                <TouchableOpacity style={styles.addBtn} onPress={() => { }}>
+                <TouchableOpacity style={styles.addBtn} onPress={() => console.log('clicked')}>
                     <Ionicons name='add-circle' size={35} color={COLORS.primary} />
                 </TouchableOpacity>
             </View>

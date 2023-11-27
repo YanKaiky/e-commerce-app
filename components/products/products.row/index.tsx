@@ -8,12 +8,12 @@ export const ProductsRow = () => {
     const products = [1, 2, 3, , 5];
 
     return (
-        <View style={{ marginTop: SIZES.medium }}>
+        <View style={styles.container}>
             <FlatList
                 data={products}
                 renderItem={({ item }) => <ProductsCard />}
                 horizontal
-                contentContainerStyle={{ columnGap: SIZES.xSmall / 2 }}
+                contentContainerStyle={styles.contentContainer}
             />
         </View>
     );
