@@ -2,8 +2,9 @@ import { ActivityIndicator, FlatList, Text, View } from 'react-native';
 import React from 'react';
 import styles from './styles';
 import { ProductsCard } from '../products.card';
-import useFetch, { IDataProps } from '../../../hooks/useFetch';
+import useFetch from '../../../hooks/useFetch';
 import { COLORS, SIZES } from '../../../constants';
+import { IProductsProps } from '../../../services/products/products.service';
 
 export const ProductsRow = () => {
     const { data, error, isLoading } = useFetch();
@@ -18,7 +19,7 @@ export const ProductsRow = () => {
                 ) : (
                     <FlatList
                         data={data}
-                        keyExtractor={(item: IDataProps) => item._id}
+                        keyExtractor={(item: IProductsProps) => item._id}
                         renderItem={({ item }) => <ProductsCard item={item} />}
                         horizontal
                         contentContainerStyle={styles.contentContainer}

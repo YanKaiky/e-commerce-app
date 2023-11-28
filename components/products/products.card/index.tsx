@@ -4,10 +4,10 @@ import React, { FC } from 'react';
 import styles from './styles';
 import { COLORS } from '../../../constants';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
-import { IDataProps } from '../../../hooks/useFetch';
+import { IProductsProps } from '../../../services/products/products.service';
 
 export interface IProductsCard {
-    item: IDataProps,
+    item: IProductsProps,
 }
 
 export const ProductsCard: FC<IProductsCard> = ({ item }) => {
@@ -27,7 +27,7 @@ export const ProductsCard: FC<IProductsCard> = ({ item }) => {
                 <View style={styles.details}>
                     <Text style={styles.title} numberOfLines={1}>{item.name}</Text>
                     <Text style={styles.supplier} numberOfLines={1}>{item.supplier}</Text>
-                    <Text style={styles.price}>${item.price}</Text>
+                    <Text style={styles.price}>${(item.price).toFixed(2)}</Text>
                 </View>
 
                 <TouchableOpacity style={styles.addBtn} onPress={() => console.log('clicked')}>

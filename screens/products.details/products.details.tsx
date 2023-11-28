@@ -41,7 +41,7 @@ export const ProductsDetails: FC<IProductsDetails> = ({ navigation }) => {
                     <View style={styles.titleRow}>
                         <Text style={styles.title}>{item.name}</Text>
                         <View style={styles.priceWrapper}>
-                            <Text style={styles.price}>${item.price * count}</Text>
+                            <Text style={styles.price}>${(item.price * count).toFixed(2)}</Text>
                         </View>
                     </View>
 
