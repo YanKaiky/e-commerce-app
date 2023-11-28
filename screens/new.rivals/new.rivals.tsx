@@ -1,11 +1,28 @@
-import { View } from 'react-native';
-import React from 'react';
+import { SafeAreaView, View, TouchableOpacity, Text } from 'react-native';
+import React, { FC } from 'react';
+import { NavigationProp } from '@react-navigation/native';
+import { Ionicons } from '@expo/vector-icons';
 import styles from './styles';
+import { COLORS } from '../../constants';
+import { ProductsList } from '../../components';
 
-export const NewRivals = () => {
+interface INewRivals {
+    navigation: NavigationProp<any>,
+}
+
+export const NewRivals: FC<INewRivals> = ({ navigation }) => {
     return (
-        <View>
+        <SafeAreaView style={styles.container}>
+            <View style={styles.wrapper}>
+                <View style={styles.upperRow}>
+                    <TouchableOpacity onPress={() => navigation.goBack()}>
+                        <Ionicons name='chevron-back-circle' size={30} color={COLORS.ligthWhite} />
+                    </TouchableOpacity>
 
-        </View>
+                    <Text style={styles.heading}>Products</Text>
+                </View>
+            </View>
+            <ProductsList />
+        </SafeAreaView>
     );
 }
