@@ -1,10 +1,11 @@
-import { FlatList, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { FlatList, Image, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Feather, Ionicons } from '@expo/vector-icons';
 import styles from './styles';
 import React, { useEffect, useState } from 'react';
 import { COLORS, SIZES } from '../../constants';
 import { IProductsProps, ProductsService } from '../../services/products/products.service';
+import { SearchTile } from '../../components';
 
 export const Search = () => {
     const [products, setProducts] = useState<IProductsProps[]>([]);
@@ -48,14 +49,15 @@ export const Search = () => {
 
             {
                 !products.length ? (
-                    <View style={{ flex: 1 }}>
-                        <Text>Empty list</Text>
+                    <View style={styles.constainerImage}>
+                        <Image source={require('../../assets/images/empty.png')} style={styles.searchImage} />
                     </View>
                 ) : (
                     <FlatList
                         data={products}
                         keyExtractor={(item) => item._id}
-                        renderItem={({ item }) => <Text>{item.name}</Text>}
+                        renderItem={({ item }) => <SearchTile item={item} />}
+                        style={{ marginHorizontal: 12 }}
                     />
                 )
             }

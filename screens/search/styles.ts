@@ -37,7 +37,11 @@ const styles = StyleSheet.create({
         height: '100%',
         paddingHorizontal: SIZES.small
     },
-    serachImage: {
+    constainerImage: {
+        flex: 1,
+        alignItems: 'center'
+    },
+    searchImage: {
         resizeMode: 'contain',
         width: SIZES.width - 100,
         height: SIZES.height - 300,

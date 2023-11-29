@@ -1,9 +1,9 @@
 import { ActivityIndicator, FlatList, Text, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import styles from './styles';
 import { ProductsCard } from '../products.card';
 import { COLORS, SIZES } from '../../../constants';
 import { IProductsProps, ProductsService } from '../../../services/products/products.service';
+import styles from './styles';
 
 export const ProductsRow = () => {
     const [products, setProducts] = useState<IProductsProps[]>([]);
