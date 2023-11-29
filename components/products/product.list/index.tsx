@@ -1,12 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, FlatList, View } from 'react-native';
-import useFetch from '../../../hooks/useFetch';
 import styles from './styles';
 import { COLORS, SIZES } from '../../../constants';
 import { ProductsCard } from '../products.card';
+import { IProductsProps, ProductsService } from '../../../services/products/products.service';
 
 export const ProductsList = () => {
-    const { data, isLoading } = useFetch();
+    const [products, setProducts] = useState<IProductsProps[]>([]);
+    const [isLoading, setIsLoading] = useState(false);
+
+    const fetchData = async () => {
+        setIsLoading(true);
+
+        try {
+            const response = await ProductsService.getAll();
+
+            setProducts(response.data);
+
+            setIsLoading(false);
+        } catch (error: any) {
+            setIsLoading(false);
+        }
+    }
+
+    useEffect(() => {
+        fetchData();
+    }, []);
 
     return (
         isLoading ? (
@@ -16,7 +35,7 @@ export const ProductsList = () => {
         ) : (
             <View style={styles.container}>
                 <FlatList
-                    data={data}
+                    data={products}
                     numColumns={2}
                     renderItem={({ item }) => (<ProductsCard item={item} />)}
                     contentContainerStyle={styles.flatList}

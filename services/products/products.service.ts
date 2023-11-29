@@ -13,9 +13,9 @@ export interface IProductsProps {
     updatedAt: Date;
 }
 
-const getAll = async (): Promise<IProductsProps | any> => {
+const getAll = async (search: string = ""): Promise<IProductsProps | any> => {
     try {
-        const response = await axios.get(PRODUCTS_API);
+        const response = await axios.get(`${PRODUCTS_API}?search=${search}`);
 
         return response;
     } catch (error) {

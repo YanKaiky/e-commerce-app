@@ -1,13 +1,34 @@
 import { ActivityIndicator, FlatList, Text, View } from 'react-native';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './styles';
 import { ProductsCard } from '../products.card';
-import useFetch from '../../../hooks/useFetch';
 import { COLORS, SIZES } from '../../../constants';
-import { IProductsProps } from '../../../services/products/products.service';
+import { IProductsProps, ProductsService } from '../../../services/products/products.service';
 
 export const ProductsRow = () => {
-    const { data, error, isLoading } = useFetch();
+    const [products, setProducts] = useState<IProductsProps[]>([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(null);
+
+    const fetchData = async () => {
+        setIsLoading(true);
+
+        try {
+            const response = await ProductsService.getAll();
+
+            setProducts(response.data);
+
+            setIsLoading(false);
+        } catch (error: any) {
+            setError(error);
+        } finally {
+            setIsLoading(false);
+        }
+    }
+
+    useEffect(() => {
+        fetchData();
+    }, []);
 
     return (
         <View style={styles.container}>
@@ -18,7 +39,7 @@ export const ProductsRow = () => {
                     <Text>Something went wrong</Text>
                 ) : (
                     <FlatList
-                        data={data}
+                        data={products}
                         keyExtractor={(item: IProductsProps) => item._id}
                         renderItem={({ item }) => <ProductsCard item={item} />}
                         horizontal
