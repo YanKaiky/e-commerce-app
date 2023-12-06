@@ -1,15 +1,33 @@
 import { StyleSheet } from 'react-native';
+import { COLORS } from '../../constants';
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
+        backgroundColor: COLORS.ligthWhite,
     },
-    textStyle: {
-        fontFamily: 'regular',
-        fontSize: 20,
+    cover: {
+        height: 290,
+        width: '100%',
+        resizeMode: 'cover'
+    },
+    profileContainer: {
+        flex: 1,
+        alignItems: 'center',
+    },
+    profile: {
+        height: 155,
+        width: 155,
+        borderRadius: 999,
+        borderColor: COLORS.primary,
+        borderWidth: 2,
+        resizeMode: 'cover',
+        marginTop: -90,
+    },
+    name: {
+        fontFamily: 'bold',
+        color: COLORS.primary,
+        marginVertical: 5,
     }
 });
 
