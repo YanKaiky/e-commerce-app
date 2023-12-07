@@ -4,7 +4,7 @@ import { useCallback } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { BottomTabNavigation } from './navigation';
-import { Cart, NewRivals, ProductsDetails } from './screens';
+import { Cart, Login, NewRivals, ProductsDetails } from './screens';
 
 const Stack = createNativeStackNavigator();
 
@@ -31,6 +31,7 @@ const App = () => {
         <Stack.Screen name='Cart' component={Cart} options={{ headerShown: false }} />
         <Stack.Screen name='ProductsDetails' component={ProductsDetails} options={{ headerShown: false }} />
         <Stack.Screen name='NewRivals' component={NewRivals} options={{ headerShown: false }} />
+        <Stack.Screen name='Login' component={Login} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

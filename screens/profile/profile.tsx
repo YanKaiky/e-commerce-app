@@ -1,11 +1,22 @@
 import { StatusBar } from 'expo-status-bar';
-import { Image, Text, View } from 'react-native';
-import React, { useState } from 'react';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
+import React, { FC, useState } from 'react';
 import styles from './styles';
 import { COLORS } from '../../constants';
+import { NavigationProp } from '@react-navigation/native';
 
-export const Profile = () => {
-    const [user, setUser] = useState(null);
+interface IUser {
+    name: string,
+    email: string,
+    image_url: string,
+}
+
+interface IProfile {
+    navigation: NavigationProp<any>,
+}
+
+export const Profile: FC<IProfile> = ({ navigation }) => {
+    const [user, setUser] = useState<IUser | null>(null);
     const [logged, setLogged] = useState(false);
 
     return (
@@ -26,7 +37,19 @@ export const Profile = () => {
                         style={styles.profile}
                     />
 
-                    <Text style={styles.name}>{logged ? user.name : 'Please login into your account'}</Text>
+                    <Text style={styles.name}>{logged ? user?.name : 'Please login into your account'}</Text>
+
+                    {!logged ? (
+                        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+                            <View style={styles.loginBtn}>
+                                <Text style={styles.menuText}>Login</Text>
+                            </View>
+                        </TouchableOpacity>
+                    ) : (
+                        <View style={styles.loginBtn}>
+                            <Text style={styles.menuText}>yankaikys@gmail.com</Text>
+                        </View>
+                    )}
                 </View>
             </View>
         </View>

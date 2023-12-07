@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { COLORS } from '../../constants';
+import { COLORS, SIZES } from '../../constants';
 
 const styles = StyleSheet.create({
     container: {
@@ -19,8 +19,8 @@ const styles = StyleSheet.create({
         height: 155,
         width: 155,
         borderRadius: 999,
-        borderColor: COLORS.primary,
-        borderWidth: 2,
+        borderColor: COLORS.ligthWhite,
+        borderWidth: 3,
         resizeMode: 'cover',
         marginTop: -90,
     },
@@ -28,6 +28,21 @@ const styles = StyleSheet.create({
         fontFamily: 'bold',
         color: COLORS.primary,
         marginVertical: 5,
+    },
+    loginBtn: {
+        backgroundColor: COLORS.secondary,
+        padding: 2,
+        borderWidth: 0.4,
+        borderColor: COLORS.primary,
+        borderRadius: SIZES.xxLarge,
+    },
+    menuText: {
+        fontFamily: 'regular',
+        color: COLORS.gray,
+        marginHorizontal: 20,
+        fontWeight: '600',
+        fontSize: 14,
+        lineHeight: 26,
     }
 });
 
