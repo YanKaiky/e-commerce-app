@@ -1,4 +1,4 @@
-import { FlatList, Image, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { FlatList, Image, TextInput, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Feather, Ionicons } from '@expo/vector-icons';
 import styles from './styles';
@@ -22,7 +22,7 @@ export const Search = () => {
     }, []);
 
     return (
-        <SafeAreaView>
+        <SafeAreaView style={styles.safeArea}>
             <View style={styles.searchContainer}>
                 <TouchableOpacity>
                     <Ionicons name='camera-outline' size={24} style={styles.searchIcon} />
