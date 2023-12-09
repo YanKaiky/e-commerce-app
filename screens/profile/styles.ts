@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, ViewStyle, TextStyle, ImageStyle } from 'react-native';
 import { COLORS, SIZES } from '../../constants';
 
 const styles = StyleSheet.create({
@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
         backgroundColor: COLORS.ligthWhite,
     },
     cover: {
-        height: 290,
+        height: 260,
         width: '100%',
         resizeMode: 'cover'
     },
@@ -16,8 +16,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     profile: {
-        height: 155,
-        width: 155,
+        height: 140,
+        width: 140,
         borderRadius: 999,
         borderColor: COLORS.ligthWhite,
         borderWidth: 3,
@@ -43,6 +43,19 @@ const styles = StyleSheet.create({
         fontWeight: '600',
         fontSize: 14,
         lineHeight: 26,
+    },
+    menuWrapper: {
+        marginTop: SIZES.xLarge,
+        width: SIZES.width - SIZES.large,
+        backgroundColor: COLORS.ligthWhite,
+        borderRadius: 12,
+    },
+    menuItem: {
+        borderTopWidth: 0.2,
+        flexDirection: 'row',
+        paddingVertical: 15,
+        paddingHorizontal: 30,
+        borderColor: COLORS.gray,
     }
 });
 
