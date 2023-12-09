@@ -57,7 +57,7 @@ export const Search = () => {
                         data={products}
                         keyExtractor={(item) => item._id}
                         renderItem={({ item }) => <SearchTile item={item} />}
-                        style={{ marginHorizontal: 12 }}
+                        style={{ flex: 1, marginBottom: SIZES.xxLarge, marginHorizontal: 12 }}
                     />
                 )
             }

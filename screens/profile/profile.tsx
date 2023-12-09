@@ -27,7 +27,7 @@ export const Profile: FC<IProfile> = ({ navigation }) => {
             {
                 text: "Cancel",
                 onPress: () => console.log('Cancel'),
-                style: 'cancel'
+                style: 'default'
             },
             {
                 text: "Continue",
