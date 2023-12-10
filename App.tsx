@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { BottomTabNavigation } from './navigation';
 import { Cart, Favorites, Login, NewRivals, Orders, ProductsDetails } from './screens';
+import { AuthProvider } from './contexts';
 
 const Stack = createNativeStackNavigator();
 
@@ -25,17 +26,19 @@ const App = () => {
   if (!fontsLoaded) return null;
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name='BottomNavigation' component={BottomTabNavigation} options={{ headerShown: false }} />
-        <Stack.Screen name='Cart' component={Cart} options={{ headerShown: false }} />
-        <Stack.Screen name='ProductsDetails' component={ProductsDetails} options={{ headerShown: false }} />
-        <Stack.Screen name='NewRivals' component={NewRivals} options={{ headerShown: false }} />
-        <Stack.Screen name='Login' component={Login} options={{ headerShown: false }} />
-        <Stack.Screen name='Orders' component={Orders} options={{ headerShown: false }} />
-        <Stack.Screen name='Favorites' component={Favorites} options={{ headerShown: false }} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <AuthProvider>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName='BottomNavigation'>
+          <Stack.Screen name='BottomNavigation' component={BottomTabNavigation} options={{ headerShown: false }} />
+          <Stack.Screen name='Cart' component={Cart} options={{ headerShown: false }} />
+          <Stack.Screen name='ProductsDetails' component={ProductsDetails} options={{ headerShown: false }} />
+          <Stack.Screen name='NewRivals' component={NewRivals} options={{ headerShown: false }} />
+          <Stack.Screen name='Login' component={Login} options={{ headerShown: false }} />
+          <Stack.Screen name='Orders' component={Orders} options={{ headerShown: false }} />
+          <Stack.Screen name='Favorites' component={Favorites} options={{ headerShown: false }} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </AuthProvider>
   );
 }
 
