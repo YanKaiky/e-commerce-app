@@ -5,6 +5,7 @@ import styles from './styles';
 import { COLORS } from '../../constants';
 import { NavigationProp } from '@react-navigation/native';
 import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
+import { useAuth } from '../../hooks/useAuth';
 
 interface IUser {
     name: string,
@@ -17,10 +18,9 @@ interface IProfile {
 }
 
 export const Profile: FC<IProfile> = ({ navigation }) => {
-    const [user, setUser] = useState<IUser | null>(null);
-    const [logged, setLogged] = useState(false);
+    const { user, isAuthenticated, logout } = useAuth();
 
-    const logout = () => Alert.alert(
+    const handleLogout = () => Alert.alert(
         "Logout",
         "Are you sure you want to logoout?",
         [
@@ -31,7 +31,7 @@ export const Profile: FC<IProfile> = ({ navigation }) => {
             },
             {
                 text: "Continue",
-                onPress: () => console.log('Continue'),
+                onPress: () => logout(),
             },
         ],
     );
@@ -86,9 +86,9 @@ export const Profile: FC<IProfile> = ({ navigation }) => {
                         style={styles.profile}
                     />
 
-                    <Text style={styles.name}>{logged ? "Yan Kaiky" : 'Please login into your account'}</Text>
+                    <Text style={styles.name}>{isAuthenticated ? user?.name : 'Please login into your account'}</Text>
 
-                    {!logged ? (
+                    {!isAuthenticated ? (
                         <TouchableOpacity onPress={() => navigation.navigate('Login')}>
                             <View style={styles.loginBtn}>
                                 <Text style={styles.menuText}>Login</Text>
@@ -96,11 +96,11 @@ export const Profile: FC<IProfile> = ({ navigation }) => {
                         </TouchableOpacity>
                     ) : (
                         <View style={styles.loginBtn}>
-                            <Text style={styles.menuText}>yankaikys@gmail.com</Text>
+                            <Text style={styles.menuText}>{user?.email}</Text>
                         </View>
                     )}
 
-                    {!logged ? (
+                    {!isAuthenticated ? (
                         <View></View>
                     ) : (
                         <View style={styles.menuWrapper}>
@@ -164,7 +164,7 @@ export const Profile: FC<IProfile> = ({ navigation }) => {
                                 </View>
                             </TouchableOpacity>
 
-                            <TouchableOpacity onPress={() => logout()}>
+                            <TouchableOpacity onPress={() => handleLogout()}>
                                 <View style={styles.menuItem}>
                                     <AntDesign
                                         name='logout'

@@ -3,8 +3,8 @@ import { COLORS, SIZES } from '../../constants';
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        backgroundColor: COLORS.ligthWhite,
+        top: SIZES.xxLarge,
+        width: SIZES.width
     },
     wrapper: {
         flex: 1,

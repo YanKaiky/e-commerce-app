@@ -15,12 +15,10 @@ const styles = StyleSheet.create({
     },
     flatList: {
         alignItems: 'center',
-        paddingTop: SIZES.xxLarge,
-        paddingLeft: SIZES.small / 2,
         paddingBottom: SIZES.xxLarge,
     },
     separator: {
-        height: 16,
+        height: 8,
     }
 });
 

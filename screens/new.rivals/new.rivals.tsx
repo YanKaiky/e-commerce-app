@@ -12,7 +12,7 @@ interface INewRivals {
 
 export const NewRivals: FC<INewRivals> = ({ navigation }) => {
     return (
-        <SafeAreaView style={styles.container}>
+        <SafeAreaView style={styles.wrapper}>
             <View style={styles.wrapper}>
                 <View style={styles.upperRow}>
                     <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -22,7 +22,9 @@ export const NewRivals: FC<INewRivals> = ({ navigation }) => {
                     <Text style={styles.heading}>Products</Text>
                 </View>
             </View>
-            <ProductsList />
+            <View style={styles.container}>
+                <ProductsList />
+            </View>
         </SafeAreaView>
     );
 }
