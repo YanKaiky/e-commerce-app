@@ -18,7 +18,7 @@ interface IProfile {
 
 export const Profile: FC<IProfile> = ({ navigation }) => {
     const [user, setUser] = useState<IUser | null>(null);
-    const [logged, setLogged] = useState(true);
+    const [logged, setLogged] = useState(false);
 
     const logout = () => Alert.alert(
         "Logout",
@@ -104,7 +104,7 @@ export const Profile: FC<IProfile> = ({ navigation }) => {
                         <View></View>
                     ) : (
                         <View style={styles.menuWrapper}>
-                            <TouchableOpacity onPress={() => { }}>
+                            <TouchableOpacity onPress={() => navigation.navigate('Favorites')}>
                                 <View style={styles.menuItem}>
                                     <MaterialCommunityIcons
                                         name='heart-outline'
@@ -116,7 +116,7 @@ export const Profile: FC<IProfile> = ({ navigation }) => {
                                 </View>
                             </TouchableOpacity>
 
-                            <TouchableOpacity onPress={() => { }}>
+                            <TouchableOpacity onPress={() => navigation.navigate('Orders')}>
                                 <View style={styles.menuItem}>
                                     <MaterialCommunityIcons
                                         name='truck-outline'
@@ -128,7 +128,7 @@ export const Profile: FC<IProfile> = ({ navigation }) => {
                                 </View>
                             </TouchableOpacity>
 
-                            <TouchableOpacity onPress={() => { }}>
+                            <TouchableOpacity onPress={() => navigation.navigate('Cart')}>
                                 <View style={styles.menuItem}>
                                     <MaterialCommunityIcons
                                         name='cart-outline'

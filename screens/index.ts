@@ -2,6 +2,8 @@ export * from './home/home';
 export * from './cart/cart';
 export * from './products.details/products.details';
 export * from './profile/profile';
+export * from './favorites/favorites';
 export * from './search/search';
+export * from './orders/orders';
 export * from './new.rivals/new.rivals';
 export * from './login/login';
