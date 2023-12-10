@@ -1,12 +1,12 @@
 
 import { createContext, FC, ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
 import { AuthService } from '../services/auth/auth.service';
-import { jwtDecode } from "jwt-decode";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Alert } from 'react-native';
 
 interface IAuthContextData {
   isAuthenticated: boolean,
-  login: (encode: string) => Promise<string | void>,
+  login: (encode: string) => Promise<string | number | void>,
   logout: () => void,
   user: IAuthUserProps | undefined,
   setUser: (user: IAuthUserProps) => void,
@@ -61,22 +61,30 @@ export const AuthProvider: FC<IAuthProviderProps> = ({ children }) => {
   }, [handleLogout, token]);
 
   const handleLogin = useCallback(async (encode: string) => {
-    const result = await AuthService.login(encode);
+    try {
+      const response = await AuthService.login(encode);
 
-    if (result instanceof Error) return result.data.message;
+      const data = JSON.parse(JSON.stringify(response.data));
 
-    const token: string = result.data.token;
+      const token = data.token;
+      const user = data.user;
 
-    const user: IAuthUserProps = jwtDecode(result.data.token);
+      await AsyncStorage.setItem('TOKEN', token);
+      await AsyncStorage.setItem('USER', JSON.stringify(user));
 
-    console.log({ token, user })
+      setUser(user);
 
-    await AsyncStorage.setItem('TOKEN', token);
-    await AsyncStorage.setItem('USER', JSON.stringify(user));
+      setToken(token);
+    } catch (error: any) {
+      Alert.alert(
+        "Invalid Form",
+        error.response.data.message,
+      );
 
-    setUser(user);
+      const status: number = error.response.status;
 
-    setToken(token);
+      return status;
+    }
   }, []);
 
   const isAuthenticated = useMemo(() => !!token, [token]);
