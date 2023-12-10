@@ -7,3 +7,4 @@ export * from './search/search';
 export * from './orders/orders';
 export * from './new.rivals/new.rivals';
 export * from './login/login';
+export * from './sign.up/sign.up';

@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 20,
     },
     cover: {
-        height: SIZES.height / 2.4,
+        height: SIZES.height / 3.5,
         width: SIZES.width - 50,
         resizeMode: 'contain',
         marginBottom: SIZES.xLarge

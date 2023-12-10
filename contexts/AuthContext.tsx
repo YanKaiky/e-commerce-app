@@ -2,6 +2,7 @@
 import { createContext, FC, ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
 import { AuthService } from '../services/auth/auth.service';
 import { jwtDecode } from "jwt-decode";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface IAuthContextData {
   isAuthenticated: boolean,
@@ -32,29 +33,31 @@ export const AuthProvider: FC<IAuthProviderProps> = ({ children }) => {
   const [token, setToken] = useState<string>();
   const [user, setUser] = useState<IAuthUserProps>();
 
-  const handleLogout = useCallback(() => {
-    // localStorage.removeItem('TOKEN');
-    // localStorage.removeItem('USER');
+  const handleLogout = useCallback(async () => {
+    await AsyncStorage.removeItem('TOKEN');
+    await AsyncStorage.removeItem('USER');
 
     setToken(undefined);
   }, []);
 
   useEffect(() => {
-    // const token = localStorage.getItem('TOKEN');
-    // const user = localStorage.getItem('USER');
+    (async () => {
+      const token = await AsyncStorage.getItem('TOKEN');
+      const user = await AsyncStorage.getItem('USER');
 
-    // if (user) setUser(JSON.parse(user!));
+      if (user) setUser(JSON.parse(user));
 
-    if (token) {
-      setToken(JSON.parse(JSON.stringify(token)));
-    }
+      if (token) {
+        setToken(JSON.parse(JSON.stringify(token)));
+      }
 
-    // if (!user || !token) {
-    //   localStorage.removeItem('TOKEN');
-    //   localStorage.removeItem('USER');
+      if (!user || !token) {
+        await AsyncStorage.removeItem('TOKEN');
+        await AsyncStorage.removeItem('USER');
 
-    //   setToken(undefined);
-    // }
+        setToken(undefined);
+      }
+    })()
   }, [handleLogout, token]);
 
   const handleLogin = useCallback(async (encode: string) => {
@@ -66,8 +69,10 @@ export const AuthProvider: FC<IAuthProviderProps> = ({ children }) => {
 
     const user: IAuthUserProps = jwtDecode(result.data.token);
 
-    // localStorage.setItem('TOKEN', token);
-    // localStorage.setItem('USER', JSON.stringify(user));
+    console.log({ token, user })
+
+    await AsyncStorage.setItem('TOKEN', token);
+    await AsyncStorage.setItem('USER', JSON.stringify(user));
 
     setUser(user);
 

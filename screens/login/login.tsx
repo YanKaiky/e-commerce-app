@@ -1,4 +1,4 @@
-import { Image, SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Alert, Image, SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import React, { useState } from 'react';
 import styles from './styles';
 import { encode as BufferBase64 } from 'base-64';
@@ -14,25 +14,42 @@ import { COLORS } from '../../constants';
 export const Login = () => {
     const navigation: NavigationProp<any> = useNavigation();
 
-    const [data, setData] = useState({ email: '', password: '' });
-    const [loader, setLoader] = useState(false);
-    const [error, setError] = useState(false);
-    const [response, setResponse] = useState(null);
+    const [loading, setLoading] = useState(false);
     const [obscureText, setObscureText] = useState(true);
 
     const { login } = useAuth();
 
-    const handleLogin = async () => {
+    const handleLogin = async (email: string, password: string) => {
         try {
-            const encode = BufferBase64(`${data.email}:${data.password}`);
+            setLoading(true);
+
+            const encode = BufferBase64(`${email}:${password}`);
 
             await login(encode);
+
+            setLoading(false);
 
             navigation.navigate('BottomNavigation');
         } catch (error: any) {
             console.error(error.response.data.message);
         }
     };
+
+    const invalidForm = () => Alert.alert(
+        "Invalid Form",
+        "Please provide all required fields",
+        [
+            {
+                text: "Cancel",
+                onPress: () => console.log('Cancel'),
+                style: 'cancel'
+            },
+            {
+                text: "Continue",
+                onPress: () => console.log('Continue'),
+            },
+        ],
+    );
 
     return (
         <ScrollView>
@@ -49,7 +66,7 @@ export const Login = () => {
                     <Formik
                         initialValues={initialValues}
                         validationSchema={validationSchema}
-                        onSubmit={(values) => console.log(values)}
+                        onSubmit={(values) => handleLogin(values.email, values.password)}
                     >
                         {({ handleChange, handleBlur, handleSubmit, values, touched, errors, isValid, setFieldTouched }) => (
                             <View>
@@ -114,7 +131,9 @@ export const Login = () => {
                                     {touched.password && errors.password && (<Text style={styles.errorMsg}>{errors.password}</Text>)}
                                 </View>
 
-                                <Button title='LOGIN' onPress={() => isValid ? handleSubmit : () => { }} isValid={isValid} />
+                                <Button title='LOGIN' onPress={isValid ? handleSubmit : invalidForm} isValid={isValid} loading={loading} />
+
+                                <Text style={styles.registration} onPress={() => navigation.navigate('SignUp')}>Register</Text>
                             </View>
                         )}
                     </Formik>
