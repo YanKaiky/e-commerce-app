@@ -8,6 +8,7 @@ import initialValues from './schemas/initial.values';
 import validationSchema from './schemas/validation.schema';
 import { Formik } from 'formik';
 import { COLORS } from '../../constants';
+import { ICreateUserProps, UsersService } from '../../services/users/users.service';
 
 export const SignUp = () => {
     const navigation: NavigationProp<any> = useNavigation();
@@ -32,6 +33,22 @@ export const SignUp = () => {
         ],
     );
 
+    const handleSignUp = async (data: ICreateUserProps) => {
+        try {
+            setLoading(true);
+
+            const response = await UsersService.create(data);
+
+            setLoading(false);
+
+            if (response.status === 201) navigation.navigate('Login');
+        } catch (error) {
+            setLoading(false);
+        } finally {
+            setLoading(false);
+        }
+    } 
+    
     return (
         <ScrollView>
             <SafeAreaView style={styles.safeArea}>
@@ -47,7 +64,7 @@ export const SignUp = () => {
                     <Formik
                         initialValues={initialValues}
                         validationSchema={validationSchema}
-                        onSubmit={(values) => console.log(values)}
+                        onSubmit={(values) => handleSignUp(values)}
                     >
                         {({ handleChange, handleBlur, handleSubmit, values, touched, errors, isValid, setFieldTouched }) => (
                             <View>

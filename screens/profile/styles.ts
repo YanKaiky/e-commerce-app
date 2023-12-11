@@ -36,8 +36,17 @@ const styles = StyleSheet.create({
         borderColor: COLORS.primary,
         borderRadius: SIZES.xxLarge,
     },
+    registerBtn: {
+        backgroundColor: COLORS.secondary,
+        padding: 2,
+        marginTop: 4,
+        borderWidth: 0.4,
+        borderColor: COLORS.primary,
+        borderRadius: SIZES.xxLarge,
+    },
     menuText: {
         fontFamily: 'regular',
+        textAlign: 'center',
         color: COLORS.gray,
         marginHorizontal: 20,
         fontWeight: '600',

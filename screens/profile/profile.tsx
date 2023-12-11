@@ -76,11 +76,19 @@ export const Profile: FC<IProfile> = ({ navigation }) => {
                     <Text style={styles.name}>{isAuthenticated ? user?.name : 'Please login into your account'}</Text>
 
                     {!isAuthenticated ? (
-                        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-                            <View style={styles.loginBtn}>
-                                <Text style={styles.menuText}>Login</Text>
-                            </View>
-                        </TouchableOpacity>
+                        <View>
+                            <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+                                <View style={styles.loginBtn}>
+                                    <Text style={styles.menuText}>Login</Text>
+                                </View>
+                            </TouchableOpacity>
+
+                            <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
+                                <View style={styles.registerBtn}>
+                                    <Text style={styles.menuText}>Sign Up</Text>
+                                </View>
+                            </TouchableOpacity>
+                        </View>
                     ) : (
                         <View style={styles.loginBtn}>
                             <Text style={styles.menuText}>{user?.email}</Text>
