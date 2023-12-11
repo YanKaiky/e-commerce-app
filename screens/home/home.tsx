@@ -4,15 +4,18 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons, Fontisto } from '@expo/vector-icons';
 import styles from './styles';
 import { HomeCarousel, HomeHeadings, HomeWelcome, ProductsRow } from '../../components';
+import { useAuth } from '../../hooks/useAuth';
 
 export const Home = () => {
+    const { user } = useAuth();
+
     return (
         <SafeAreaView>
             <View style={styles.appBarWrapper}>
                 <View style={styles.appBar}>
                     <Ionicons name='location-outline' size={24} />
 
-                    <Text style={styles.location}>Blumenau, Brazil</Text>
+                    <Text style={styles.location}>{user?.location ?? ''}</Text>
 
                     <View style={{ alignItems: 'flex-end' }}>
                         <View style={styles.cartCount}>

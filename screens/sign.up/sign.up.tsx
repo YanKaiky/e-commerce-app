@@ -12,6 +12,7 @@ import { COLORS } from '../../constants';
 export const SignUp = () => {
     const navigation: NavigationProp<any> = useNavigation();
 
+    const [loading, setLoading] = useState(false);
     const [obscureText, setObscureText] = useState(true);
     const [obscureConfirmText, setObscureConfirmText] = useState(true);
 
@@ -221,7 +222,7 @@ export const SignUp = () => {
                                     {touched.location && errors.location && (<Text style={styles.errorMsg}>{errors.location}</Text>)}
                                 </View>
 
-                                <Button title='SIGN UP' onPress={isValid ? handleSubmit : invalidForm} isValid={isValid} />
+                                <Button title='SIGN UP' onPress={isValid ? handleSubmit : invalidForm} isValid={isValid} loading={loading} />
 
                                 <Text style={styles.registration} onPress={() => navigation.navigate('Login')}>Login</Text>
                             </View>

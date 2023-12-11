@@ -5,12 +5,15 @@ import { NavigationProp, useRoute } from '@react-navigation/native';
 import { Ionicons, SimpleLineIcons, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import { COLORS } from '../../constants';
 import { IProductsCard } from '../../components';
+import { useAuth } from '../../hooks/useAuth';
 
 interface IProductsDetails {
     navigation: NavigationProp<any>,
 }
 
 export const ProductsDetails: FC<IProductsDetails> = ({ navigation }) => {
+    const { isAuthenticated, user } = useAuth();
+
     const [count, setCount] = useState<number>(1);
 
     const route = useRoute();
@@ -18,18 +21,18 @@ export const ProductsDetails: FC<IProductsDetails> = ({ navigation }) => {
     const { item } = route.params as IProductsCard;
 
     return (
-        <ScrollView>
-            <View style={styles.container}>
-                <View style={styles.upperRow}>
-                    <TouchableOpacity onPress={() => navigation.goBack()}>
-                        <Ionicons name='chevron-back-circle' size={30} />
-                    </TouchableOpacity>
+        <View style={styles.container}>
+            <View style={styles.upperRow}>
+                <TouchableOpacity onPress={() => navigation.goBack()}>
+                    <Ionicons name='chevron-back-circle' size={30} />
+                </TouchableOpacity>
 
-                    <TouchableOpacity onPress={() => { }}>
-                        <Ionicons name='heart' size={30} color={COLORS.primary} />
-                    </TouchableOpacity>
-                </View>
+                <TouchableOpacity onPress={() => { }}>
+                    <Ionicons name='heart' size={30} color={COLORS.primary} />
+                </TouchableOpacity>
+            </View>
 
+            <ScrollView>
                 <Image
                     source={{
                         uri: item.image_url
@@ -83,7 +86,7 @@ export const ProductsDetails: FC<IProductsDetails> = ({ navigation }) => {
                         <View style={styles.location}>
                             <View style={styles.locationContent}>
                                 <Ionicons name='location-outline' size={20} />
-                                <Text>{item.product_location}</Text>
+                                <Text>{isAuthenticated ? user?.location : item.product_location}</Text>
                             </View>
 
                             <View style={styles.locationContent}>
@@ -103,7 +106,7 @@ export const ProductsDetails: FC<IProductsDetails> = ({ navigation }) => {
                         </TouchableOpacity>
                     </View>
                 </View>
-            </View>
-        </ScrollView>
+            </ScrollView>
+        </View>
     );
 }

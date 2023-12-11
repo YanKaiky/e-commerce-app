@@ -20,16 +20,20 @@ export const Login = () => {
     const { login } = useAuth();
 
     const handleLogin = async (email: string, password: string) => {
-        setLoading(true);
+        try {
+            setLoading(true);
 
-        const encode = BufferBase64(`${email}:${password}`);
+            const encode = BufferBase64(`${email}:${password}`);
 
-        const response = await login(encode);
+            const response = await login(encode);
 
-        setLoading(false);
+            setLoading(false);
 
-        if (response !== 401) {
-            navigation.navigate('BottomNavigation');
+            if (response !== 401) navigation.navigate('BottomNavigation');
+        } catch (error) {
+            setLoading(false);
+        } finally {
+            setLoading(false);
         }
     };
 

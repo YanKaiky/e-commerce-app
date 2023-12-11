@@ -31,23 +31,10 @@ export const Profile: FC<IProfile> = ({ navigation }) => {
             },
             {
                 text: "Continue",
-                onPress: () => logout(),
-            },
-        ],
-    );
-
-    const clearCache = () => Alert.alert(
-        "Clear cache",
-        "Are you sure you want to delete all saved data on your device?",
-        [
-            {
-                text: "Cancel",
-                onPress: () => console.log('Cancel'),
-                style: 'cancel'
-            },
-            {
-                text: "Continue",
-                onPress: () => console.log('Continue'),
+                onPress: () => {
+                    logout();
+                    navigation.navigate('Login');
+                },
             },
         ],
     );
@@ -137,18 +124,6 @@ export const Profile: FC<IProfile> = ({ navigation }) => {
                                     />
 
                                     <Text style={styles.menuText}>Cart</Text>
-                                </View>
-                            </TouchableOpacity>
-
-                            <TouchableOpacity onPress={() => clearCache()}>
-                                <View style={styles.menuItem}>
-                                    <MaterialCommunityIcons
-                                        name='cached'
-                                        color={COLORS.primary}
-                                        size={24}
-                                    />
-
-                                    <Text style={styles.menuText}>Clear cache</Text>
                                 </View>
                             </TouchableOpacity>
 
